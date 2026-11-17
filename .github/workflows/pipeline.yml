@@ -13,11 +13,11 @@ on:
         type: boolean
         default: false
 
+# GitHub Models (and its `models: read` permission) was retired on 2026-07-30.
+# The Copilot CLI authenticates with the COPILOT_GITHUB_TOKEN secret (fine-grained
+# PAT with "Copilot Requests"), so the workflow token only needs to read the repo.
 permissions:
   contents: read
-  # GitHub Models (and its `models: read` permission) was retired on 2026-07-30.
-  # The default LLM is the Copilot CLI, which needs this permission when using GITHUB_TOKEN.
-  copilot-requests: write
 
 concurrency:
   group: pipeline
@@ -62,9 +62,7 @@ jobs:
           MODEL_CLASSIFY: ${{ vars.MODEL_CLASSIFY }}
           MODEL_WRITE: ${{ vars.MODEL_WRITE }}
           # Copilot CLI auth: fine-grained PAT with the "Copilot Requests" permission.
-          # Falls back to the workflow token where Copilot-in-Actions billing allows it.
           COPILOT_GITHUB_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN }}
-          GITHUB_TOKEN: ${{ github.token }}
           LLM_BASE_URL: ${{ vars.LLM_BASE_URL }}
           LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
