@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Offline · Tech Feed</title>
+    <style>
+      :root { color-scheme: light dark; }
+      body {
+        margin: 0; min-height: 100dvh; display: grid; place-items: center; text-align: center;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background: #fafafa; color: #09090b; padding: env(safe-area-inset-top) 1.5rem 2rem;
+      }
+      @media (prefers-color-scheme: dark) { body { background: #09090b; color: #fafafa; } p { color: #a1a1aa; } }
+      h1 { font-family: Georgia, serif; font-size: 1.75rem; margin: 0 0 .5rem; }
+      p { color: #475569; margin: 0 0 1.5rem; }
+      button { min-height: 44px; padding: 0 1.25rem; border-radius: 999px; border: 0; font: inherit; font-weight: 600; background: #18181b; color: #fff; cursor: pointer; }
+      @media (prefers-color-scheme: dark) { button { background: #fafafa; color: #09090b; } }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>You're offline</h1>
+      <p>Tech Feed needs a connection to load new posts.</p>
+      <button type="button" onclick="location.reload()">Try again</button>
+    </main>
+  </body>
+</html>

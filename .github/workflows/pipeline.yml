@@ -1,0 +1,75 @@
+name: pipeline
+
+# Twice a day at 6:00 AM and 6:00 PM America/Los_Angeles, DST-safe:
+# cron fires at 01,02,13,14 UTC and the gate step lets only the slots whose
+# Pacific local hour is 6 or 18 through (exactly one AM + one PM per day).
+on:
+  schedule:
+    - cron: "0 1,2,13,14 * * *"
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Run now (bypass the 6 AM/6 PM gate and the 6-hour skip)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+  # GitHub Models (and its `models: read` permission) was retired on 2026-07-30.
+  # The default LLM is the Copilot CLI, which needs this permission when using GITHUB_TOKEN.
+  copilot-requests: write
+
+concurrency:
+  group: pipeline
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      APP_TIMEZONE: America/Los_Angeles
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Schedule gate (6 AM / 6 PM Pacific)
+        id: gate
+        run: node --experimental-strip-types pipeline/schedule-gate.ts
+        env:
+          FORCE_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.force }}
+
+      - uses: actions/setup-node@v5
+        if: steps.gate.outputs.run == 'true'
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        if: steps.gate.outputs.run == 'true'
+        run: npm ci
+
+      - name: Install Copilot CLI
+        if: steps.gate.outputs.run == 'true' && (vars.LLM_PROVIDER == '' || vars.LLM_PROVIDER == 'copilot')
+        run: npm install -g @github/copilot
+
+      - name: Run pipeline
+        if: steps.gate.outputs.run == 'true'
+        run: npm run pipeline -- ${{ (github.event_name == 'workflow_dispatch' && inputs.force) && '--force' || '' }}
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          LLM_PROVIDER: ${{ vars.LLM_PROVIDER || 'copilot' }}
+          MODEL_CLASSIFY: ${{ vars.MODEL_CLASSIFY }}
+          MODEL_WRITE: ${{ vars.MODEL_WRITE }}
+          # Copilot CLI auth: fine-grained PAT with the "Copilot Requests" permission.
+          # Falls back to the workflow token where Copilot-in-Actions billing allows it.
+          COPILOT_GITHUB_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
+          LLM_BASE_URL: ${{ vars.LLM_BASE_URL }}
+          LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          MAX_PER_STREAM_PER_RUN: ${{ vars.MAX_PER_STREAM_PER_RUN }}
+          MIN_IMPORTANCE: ${{ vars.MIN_IMPORTANCE }}
+          MAX_LLM_CALLS_PER_RUN: ${{ vars.MAX_LLM_CALLS_PER_RUN }}
+          MAX_RUN_USD: ${{ vars.MAX_RUN_USD }}
+          MAX_INPUT_CHARS: ${{ vars.MAX_INPUT_CHARS }}

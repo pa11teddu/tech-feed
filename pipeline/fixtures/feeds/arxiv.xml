@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>cs.LG updates</title>
+    <link>https://arxiv.example.org</link>
+    <description>Fixture arXiv feed</description>
+    <item><title>Sparse attention at scale</title><link>https://arxiv.example.org/abs/2611.00001</link><description>arXiv:2611.00001 Abstract: We study sparse attention layouts that keep quality while reducing memory.</description><pubDate>Tue, 17 Nov 2026 05:00:00 GMT</pubDate></item>
+    <item><title>Verifier models for chain-of-thought</title><link>https://arxiv.example.org/abs/2611.00002</link><description>arXiv:2611.00002 Abstract: A compact verifier scores intermediate reasoning steps.</description><pubDate>Tue, 17 Nov 2026 05:00:00 GMT</pubDate></item>
+    <item><title>Scaling laws for retrieval-augmented models</title><link>https://arxiv.example.org/abs/2611.00003</link><description>arXiv:2611.00003 Abstract: We fit scaling laws for retrieval-augmented generation.</description><pubDate>Tue, 17 Nov 2026 05:00:00 GMT</pubDate></item>
+  </channel>
+</rss>

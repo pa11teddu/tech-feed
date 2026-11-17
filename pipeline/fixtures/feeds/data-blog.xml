@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Data Platform Blog</title>
+  <id>https://data.example.com/</id>
+  <updated>2026-11-17T10:00:00Z</updated>
+  <entry><title>Streaming engine adds exactly-once table sinks</title><link href="https://data.example.com/blog/exactly-once"/><id>1</id><updated>2026-11-17T10:00:00Z</updated><summary>Exactly-once sinks for open table formats.</summary></entry>
+  <entry><title>Vectorized joins now spill to disk</title><link href="https://data.example.com/blog/spilling-joins"/><id>2</id><updated>2026-11-17T09:00:00Z</updated><summary>Joins spill gracefully.</summary></entry>
+  <entry><title>Webinar: register for our data summit</title><link href="https://data.example.com/blog/webinar"/><id>3</id><updated>2026-11-17T08:00:00Z</updated><summary>Marketing event promo.</summary></entry>
+  <entry><title>Catalog service adds column-level lineage</title><link href="https://data.example.com/blog/lineage"/><id>4</id><updated>2026-11-17T07:00:00Z</updated><summary>Column-level lineage in the catalog.</summary></entry>
+</feed>

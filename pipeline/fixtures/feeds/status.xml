@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Cloud Status</title>
+    <link>https://status.example.net</link>
+    <description>Fixture status feed</description>
+    <item><title>Elevated API errors in us-east</title><link>https://status.example.net/incidents/1</link><description>Investigating elevated error rates for API calls in us-east. Resolved after DNS rollback.</description><pubDate>Tue, 17 Nov 2026 03:00:00 GMT</pubDate></item>
+    <item><title>Degraded object storage latency</title><link>https://status.example.net/incidents/2</link><description>Object storage latency was elevated for 40 minutes.</description><pubDate>Mon, 16 Nov 2026 22:00:00 GMT</pubDate></item>
+    <item><title>Control plane outage in eu-west</title><link>https://status.example.net/incidents/3</link><description>Console and API unavailable for 47 minutes; workloads unaffected.</description><pubDate>Mon, 16 Nov 2026 18:00:00 GMT</pubDate></item>
+  </channel>
+</rss>

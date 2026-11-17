@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:media="http://search.yahoo.com/mrss/">
+  <channel>
+    <title>AI Lab Blog</title>
+    <link>https://ai.example.com</link>
+    <description>Fixture feed</description>
+    <item><title>Lab releases open-weight reasoning model</title><link>https://ai.example.com/posts/reasoning-model?utm_source=rss</link><description>An open-weight model with strong reasoning scores.</description><pubDate>Tue, 17 Nov 2026 09:00:00 GMT</pubDate></item>
+    <item><title>Distillation recipe halves inference cost</title><link>https://ai.example.com/posts/distillation</link><description>A distillation recipe that halves inference cost.</description><pubDate>Tue, 17 Nov 2026 08:00:00 GMT</pubDate></item>
+    <item><title>Malformed output trigger: agent benchmark update</title><link>https://ai.example.com/posts/agent-benchmark</link><description>Agent benchmark update.</description><pubDate>Tue, 17 Nov 2026 09:30:00 GMT</pubDate></item>
+    <item><title>Paywalled analysis of GPU supply</title><link>https://ai.example.com/posts/gpu-supply</link><description>Summary used because the page returns 403.</description><pubDate>Tue, 17 Nov 2026 06:00:00 GMT</pubDate></item>
+    <item><title>Robots-blocked notes on tokenizer design</title><link>https://ai.example.com/private/tokenizers</link><description>Summary used because robots.txt disallows the page.</description><pubDate>Tue, 17 Nov 2026 05:00:00 GMT</pubDate></item>
+    <item><title>Old post that is too stale to ingest</title><link>https://ai.example.com/posts/stale</link><description>Older than 48 hours.</description><pubDate>Fri, 13 Nov 2026 05:00:00 GMT</pubDate></item>
+  </channel>
+</rss>
