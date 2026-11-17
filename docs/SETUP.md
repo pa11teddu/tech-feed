@@ -55,6 +55,7 @@ npm run pipeline            # real run: writes to Supabase
 
 ## 3. GitHub Actions (scheduled pipeline)
 
+0. **Make sure Actions can start on this private repo.** On the first push (2026-11-17) every run ended immediately with `startup_failure` (no jobs, no logs, run path `BuildFailed`), even the plain `ci` workflow, though both workflow files pass `actionlint` and the same steps pass locally. GitHub reports this when Actions is blocked at the account level for private repos. Check **github.com/settings/billing**: under **Budgets and alerts**, make sure no $0 Actions budget is set to stop usage, that there's no payment problem, and that included private-repo minutes remain. Then open Actions → the failed `ci` run → **Re-run all jobs**. Expected result: `ci` goes green, matching the local run (lint, typecheck, test and build all pass).
 1. **Create a fine-grained PAT for Copilot:** <https://github.com/settings/personal-access-tokens/new>
    - Name `tech-feed-copilot`, expiration of your choice, Repository access: *Public repositories (read-only)* is enough.
    - Permissions → Account permissions → **Copilot Requests: Read & write** (the only permission needed).
@@ -95,4 +96,5 @@ npm run pipeline            # real run: writes to Supabase
 | Feed is empty after login | Your email isn't in `app_owner` (RLS hides everything), or the pipeline hasn't run. |
 | Pipeline: `Missing required environment variables` | Fill `.env.local` locally, or the Actions secrets. |
 | Pipeline: `copilot CLI failed` in Actions | Check the `COPILOT_GITHUB_TOKEN` secret and its *Copilot Requests* permission. |
+| Every Actions run shows `startup_failure` with no jobs | Account-level Actions block for private repos (budget/spending limit, payment, or minutes). See step 3.0. |
 | Run status `partial` | The Copilot quota or `MAX_LLM_CALLS_PER_RUN` was hit. Stories keep their status and continue next run. |
